@@ -42,28 +42,51 @@ export default function DomainCards({ domains }: DomainCardsProps) {
               </span>
             </div>
 
-            {/* Rationale */}
-            <div className="space-y-1">
+            {/* Evidence Points */}
+            <div className="space-y-2 text-left">
               <span className="text-xs uppercase font-bold tracking-widest text-text-muted">
-                Rationale
+                Why This Fits
               </span>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                {domain.rationale}
-              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {(domain.evidencePoints || []).map((point, idx) => (
+                  <span
+                    key={`${point}-${idx}`}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-primary text-black font-semibold rounded-full text-xs select-all"
+                  >
+                    <span className="font-extrabold select-none">✓</span>
+                    <span>{point}</span>
+                  </span>
+                ))}
+                {(!domain.evidencePoints || domain.evidencePoints.length === 0) && (
+                  <span className="text-xs text-text-secondary italic">General alignment</span>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Gap & Warning block */}
+          {/* Gap Points & Warning block */}
           <div className="mt-6 pt-4 border-t border-border/80">
-            <div className="flex items-start gap-2.5 p-3 rounded-lg bg-surface border border-border/40">
-              <AlertTriangle className="text-primary-dark shrink-0 mt-0.5" />
-              <div className="space-y-0.5 text-left">
-                <span className="text-xs font-bold text-text-primary block">
-                  Identified Skill Gap
-                </span>
-                <p className="text-xs text-text-secondary leading-normal">
-                  {domain.gap}
-                </p>
+            <div className="space-y-2 text-left">
+              <span className="text-xs uppercase font-bold tracking-widest text-text-muted block">
+                Identified Skill Gaps
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {(domain.gapPoints || []).map((point, idx) => (
+                  <span
+                    key={`${point}-${idx}`}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 font-semibold rounded-full text-xs select-all"
+                    style={{
+                      backgroundColor: "rgba(255, 140, 0, 0.12)",
+                      color: "rgba(180, 83, 9, 1)",
+                    }}
+                  >
+                    <AlertTriangle className="text-primary-dark shrink-0 w-3 h-3" />
+                    <span>{point}</span>
+                  </span>
+                ))}
+                {(!domain.gapPoints || domain.gapPoints.length === 0) && (
+                  <span className="text-xs text-text-secondary italic">No major gaps identified</span>
+                )}
               </div>
             </div>
           </div>

@@ -14,6 +14,9 @@
   --color-text-muted: #999999;
   --color-black: #111111;
   --color-white: #ffffff;
+  --color-error: #dc2626;
+  --color-error-light: #fef2f2;
+  --color-error-border: #fee2e2;
   --font-sans: "Poppins", sans-serif;
   --font-poppins: "Poppins", sans-serif;
   --radius-sm: 8px;
@@ -32,6 +35,9 @@
   --text-primary: #111111;
   --text-secondary: #555555;
   --text-muted: #999999;
+  --error: #dc2626;
+  --error-light: #fef2f2;
+  --error-border: #fee2e2;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);

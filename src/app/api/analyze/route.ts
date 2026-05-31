@@ -13,24 +13,28 @@ JSON structure:
     {
       "name": "Domain name",
       "confidence": "High|Medium|Low",
-      "rationale": "2 sentence evidence-based reason from the resume",
-      "gap": "One specific skill or experience missing to be competitive"
+      "evidencePoints": ["Skill or project from resume", "Another specific evidence", "Another one", "Max 4 items"],
+      "gapPoints": ["Specific missing skill", "Another gap", "Max 3 items"]
     }
   ],
   "qualities": [
     {
-      "title": "Quality title",
-      "description": "One sentence specific to their resume, not generic"
+      "title": "Short quality title (3 words max)",
+      "description": "One sentence referencing specific resume content"
     }
   ]
 }
 
-Rules:
-- Return exactly 2-3 domains, ordered by confidence
-- Return exactly 3-4 qualities, only the strongest signals
-- Be direct and specific, reference actual content from their resume
-- Never be generic (avoid: hardworking, team player, fast learner)
-- qualities descriptions must reference specific projects or skills from the resume
+Rules & Instructions:
+- Return exactly 2-3 domains, ordered by confidence.
+- Return exactly 3-4 qualities, only the strongest signals.
+- Be direct and specific, reference actual content from their resume.
+- Never be generic (avoid: hardworking, team player, fast learner).
+- qualities descriptions must reference specific projects or skills from the resume.
+- evidencePoints: array of 3-4 SHORT labels (2-4 words each) that are specific skills, technologies, or experiences FROM the resume that make this domain a fit. Examples: "Next.js Projects", "MERN Internship", "Leadership Role", "SaaS Built"
+- gapPoints: array of 2-3 SHORT labels (2-4 words each) of specific skills or experiences MISSING for this domain. Examples: "System Design", "AWS Knowledge", "Testing Skills", "Backend Depth"
+- Never use full sentences in evidencePoints or gapPoints.
+- Each point must be independently meaningful to a hiring manager.
 `;
 
 export async function POST(req: NextRequest) {

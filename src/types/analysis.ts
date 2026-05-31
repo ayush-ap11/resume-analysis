@@ -1,8 +1,8 @@
 export interface DomainRecommendation {
   name: string;
   confidence: "High" | "Medium" | "Low";
-  rationale: string;
-  gap: string;
+  evidencePoints: string[];
+  gapPoints: string[];
 }
 
 export interface KeyQuality {
