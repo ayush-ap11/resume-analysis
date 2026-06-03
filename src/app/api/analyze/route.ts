@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import connectDB from "@/src/lib/mongodb";
-import Submission from "@/src/models/Submission";
+import {
+  createSubmission,
+  updateSubmissionAnalysis,
+  updateSubmissionFailed,
+} from "@/src/lib/submissions";
 import { uploadToCloudinary, callGemini } from "@/src/lib/analyze-helpers";
+import cloudinary from "@/src/lib/cloudinary";
 
 const GEMINI_PROMPT = `
 You are an expert career counselor and resume analyst. Analyze this resume deeply and return ONLY a valid JSON object with no markdown, no backticks, no explanation.
@@ -38,19 +42,26 @@ Rules & Instructions:
 `;
 
 export async function POST(req: NextRequest) {
-  let createdDocId: string | null = null;
+  let submissionId: number | null = null;
 
   try {
     const formData = await req.formData();
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
+    const studentIdRaw = formData.get("student_id");
     const file = formData.get("resume") as File | null;
 
-    // 1. Validation Checks
-    if (!name || !email || !file) {
+    // Validate
+    if (!studentIdRaw || !file) {
       return NextResponse.json(
-        { error: "All fields (name, email, resume) are required." },
-        { status: 400 },
+        { error: "Both student_id and resume are required." },
+        { status: 400 }
+      );
+    }
+
+    const student_id = Number(studentIdRaw);
+    if (isNaN(student_id)) {
+      return NextResponse.json(
+        { error: "student_id must be a valid number." },
+        { status: 400 }
       );
     }
 
@@ -62,75 +73,67 @@ export async function POST(req: NextRequest) {
     if (!isPDF) {
       return NextResponse.json(
         { error: "Resume must be a PDF file." },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     if (!isUnder5MB) {
       return NextResponse.json(
         { error: "Resume file size must be under 5MB." },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
-    // 2. Connect to Database
-    await connectDB();
-
+    // Upload PDF to Cloudinary
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-
-    // 3. Upload File to Cloudinary
     const cloudinaryResult = await uploadToCloudinary(buffer);
 
-    // 4. Create database Submission record in "pending" status
-    const submissionDoc = await Submission.create({
-      submitterName: name,
-      submitterEmail: email,
-      resumeUrl: cloudinaryResult.secure_url,
-      resumePublicId: cloudinaryResult.public_id,
-      status: "pending",
-      analysis: null,
+    // Create resume_submission row
+    submissionId = await createSubmission({
+      student_id,
+      resume_url: cloudinaryResult.secure_url,
+      resume_public_id: cloudinaryResult.public_id,
     });
-    createdDocId = submissionDoc._id.toString();
 
-    // 5. Convert PDF file to base64 string
+    // Convert PDF to base64 string
     const base64Data = buffer.toString("base64");
 
-    // 6. Call Google Gemini 2.5 Flash
-    const analysisResult = await callGemini(base64Data, GEMINI_PROMPT);
-
-    // 7. Update Submission Document to "completed" status
-    await Submission.findByIdAndUpdate(createdDocId, {
-      status: "completed",
-      analysis: {
-        summary: analysisResult.summary,
-        domains: analysisResult.domains,
-        qualities: analysisResult.qualities,
-      },
-    });
-
-    return NextResponse.json({
-      success: true,
-      submissionId: createdDocId,
-    });
-  } catch (error: any) {
-    console.error("Resume Analysis API Error:", error);
-
-    // 8. Safeguard: Set status to "failed" on any runtime crash
-    if (createdDocId) {
-      try {
-        await connectDB();
-        await Submission.findByIdAndUpdate(createdDocId, { status: "failed" });
-      } catch (dbError) {
-        console.error("Failed to update status to failed in DB:", dbError);
+    // Call Gemini API (gemini-2.5-flash) and parse JSON
+    let parsedResult;
+    try {
+      parsedResult = await callGemini(base64Data, GEMINI_PROMPT);
+    } catch (geminiError: any) {
+      console.error("Gemini analysis error:", geminiError);
+      if (submissionId !== null) {
+        await updateSubmissionFailed(submissionId);
       }
+      return NextResponse.json(
+        { error: geminiError?.message || "Failed to analyze resume with Gemini." },
+        { status: 500 }
+      );
     }
 
+    // Save analysis to DB
+    await updateSubmissionAnalysis(submissionId, parsedResult);
+
+    // Return 201 Success
     return NextResponse.json(
-      {
-        error: error?.message || "An internal error occurred during analysis.",
-      },
-      { status: 500 },
+      { success: true, submissionId },
+      { status: 201 }
+    );
+  } catch (error: any) {
+    console.error("Analyze API general error:", error);
+    if (submissionId !== null) {
+      try {
+        await updateSubmissionFailed(submissionId);
+      } catch (dbErr) {
+        console.error("Failed to mark submission status as failed:", dbErr);
+      }
+    }
+    return NextResponse.json(
+      { error: error?.message || "An internal server error occurred." },
+      { status: 500 }
     );
   }
 }

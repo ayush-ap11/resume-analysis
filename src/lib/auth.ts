@@ -1,8 +1,8 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
-import connectDB from "./mongodb";
-import Admin from "../models/Admin";
+import crypto from "crypto";
+import { query } from "./db";
+import { AdminRow } from "../types/analysis";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -19,22 +19,34 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
 
-        await connectDB();
-        const admin = await Admin.findOne({ email });
+        try {
+          const admins = await query<AdminRow[]>(
+            "SELECT id, email, password_sha256 FROM admins WHERE email = ?",
+            [email]
+          );
 
-        if (!admin) {
+          if (!admins || admins.length === 0) {
+            return null;
+          }
+
+          const admin = admins[0];
+          const hashedPassword = crypto
+            .createHash("sha256")
+            .update(password)
+            .digest("hex");
+
+          if (hashedPassword !== admin.password_sha256) {
+            return null;
+          }
+
+          return {
+            id: admin.id.toString(),
+            email: admin.email,
+          };
+        } catch (error) {
+          console.error("Authorize Error:", error);
           return null;
         }
-
-        const isMatch = await bcrypt.compare(password, admin.password);
-        if (!isMatch) {
-          return null;
-        }
-
-        return {
-          id: admin._id.toString(),
-          email: admin.email,
-        };
       },
     }),
   ],

@@ -9,9 +9,9 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
-import connectDB from "@/src/lib/mongodb";
-import Admin from "@/src/models/Admin";
+import crypto from "crypto";
+import { query } from "@/src/lib/db";
+import { AdminRow } from "@/src/types/analysis";
 
 export async function POST(req: NextRequest) {
   try {
@@ -34,24 +34,31 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 3. Connect to Database
-    await connectDB();
+    // 3. Check if admin already exists
+    const existingAdmins = await query<AdminRow[]>(
+      "SELECT id FROM admins WHERE email = ?",
+      [email]
+    );
 
-    // 4. Check if admin already exists
-    const existingAdmin = await Admin.findOne({ email });
-    if (existingAdmin) {
+    if (existingAdmins && existingAdmins.length > 0) {
       return NextResponse.json(
         { error: "Admin already exists." },
         { status: 409 },
       );
     }
 
-    // 5. Hash password and create admin document
-    const hashedPassword = await bcrypt.hash(password, 10);
-    await Admin.create({
-      email,
-      password: hashedPassword,
-    });
+    // 4. Hash password and create admin record
+    const hashedPassword = crypto
+      .createHash("sha256")
+      .update(password)
+      .digest("hex");
+
+    const name = email.split("@")[0];
+
+    await query(
+      "INSERT INTO admins (name, email, password_sha256) VALUES (?, ?, ?)",
+      [name, email, hashedPassword]
+    );
 
     return NextResponse.json(
       { success: true, message: "Admin created successfully" },

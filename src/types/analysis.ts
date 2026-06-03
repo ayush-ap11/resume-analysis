@@ -31,12 +31,35 @@ export interface AnalysisResult {
 }
 
 export interface SubmissionDocument {
+  id: number;
+  student_id: number;
+  resume_url: string;
+  resume_public_id: string;
+  uploaded_at: string;
+  status: "pending" | "completed" | "failed";
+  analysis: AnalysisResult | null;
+
+  // UI Compatibility virtual fields (joined from students table)
   _id: string;
   submitterName: string;
   submitterEmail: string;
+  uploadedAt: string;
   resumeUrl: string;
-  resumePublicId: string;
-  uploadedAt: Date;
-  status: "pending" | "completed" | "failed";
-  analysis: AnalysisResult | null;
+}
+
+export interface StudentRow {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  password_sha256: string;
+  created_at: string;
+}
+
+export interface AdminRow {
+  id: number;
+  name: string;
+  email: string;
+  password_sha256: string;
+  created_at: string;
 }

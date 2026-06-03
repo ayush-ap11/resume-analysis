@@ -1,5 +1,6 @@
 import Link from "next/link";
-import UploadForm from "./_components/UploadForm";
+import { Suspense } from "react";
+import UploadFormSection from "./_components/UploadFormSection";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
 
       {/* Sticky Navbar */}
       <header className="sticky top-0 z-50 bg-[var(--white)]/85 backdrop-blur-md border-b border-[var(--border)]">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-center">
           <Link
             href="/"
             className="flex items-center hover:opacity-90 transition-opacity cursor-pointer"
@@ -21,34 +22,18 @@ export default function Home() {
               className="h-8 w-auto object-contain" 
             />
           </Link>
-          <nav className="flex items-center">
-            <Link
-              href="/admin/login"
-              className="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--brand-blue)] transition-colors cursor-pointer"
-            >
-              Admin Login
-            </Link>
-          </nav>
         </div>
       </header>
 
       {/* Main Section */}
       <main className="flex-1 flex flex-col items-center justify-center py-12 px-6 relative z-10">
-        <div className="w-full max-w-[520px] text-center space-y-6">
-          <div className="space-y-3">
-            <span className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-[var(--brand-blue)] bg-[var(--brand-blue-light)] px-3.5 py-1.5 rounded-full">
-              AI Resume Screening
-            </span>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--text-primary)]">
-              Submit Your Resume
-            </h1>
-            <p className="text-sm md:text-base text-[var(--text-secondary)]">
-              Fill in your details and upload your PDF to get started.
-            </p>
+        <Suspense fallback={
+          <div className="w-full max-w-[520px] mx-auto bg-[var(--white)] p-8 rounded-[var(--radius-lg)] border border-[var(--border)] shadow-[var(--shadow-md)] text-center text-xs text-[var(--text-muted)] font-medium">
+            Loading...
           </div>
-
-          <UploadForm />
-        </div>
+        }>
+          <UploadFormSection />
+        </Suspense>
       </main>
 
       {/* Footer */}

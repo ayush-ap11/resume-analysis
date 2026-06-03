@@ -10,7 +10,7 @@ export function uploadToCloudinary(
     const uploadStream = cloudinary.uploader.upload_stream(
       {
         resource_type: "raw",
-        folder: "resumeiq/resumes",
+        folder: "eximassist/resumes",
       },
       (error, result) => {
         if (error) return reject(error);
