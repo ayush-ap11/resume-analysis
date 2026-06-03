@@ -55,7 +55,7 @@ export default function AdminSubmissionDetail({
         <div className="max-w-6xl mx-auto px-6 w-full flex items-center justify-between">
           <Link
             href="/admin/dashboard"
-            className="flex items-center gap-1.5 text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--primary-dark)] transition-colors cursor-pointer select-none"
+            className="flex items-center gap-1.5 text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--brand-blue)] transition-colors cursor-pointer select-none"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Dashboard</span>
@@ -88,7 +88,7 @@ export default function AdminSubmissionDetail({
         {submission.status === "pending" && (
           <section className="animate-fade-in-up delay-2">
             <div className="bg-[var(--white)] p-8 rounded-[var(--radius-lg)] border border-[var(--border)] shadow-[var(--shadow-md)] text-center flex flex-col items-center justify-center space-y-4 py-16">
-              <div className="w-12 h-12 bg-[var(--primary-light)] flex items-center justify-center rounded-full text-[var(--primary-dark)]">
+              <div className="w-12 h-12 bg-[var(--brand-blue-light)] flex items-center justify-center rounded-full text-[var(--brand-blue)]">
                 <Loader2 className="animate-spin w-6 h-6" />
               </div>
               <div className="space-y-1">

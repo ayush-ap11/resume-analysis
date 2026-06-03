@@ -36,7 +36,7 @@ export default function CandidateHeader({
   const getStatusStyle = (s: typeof status) => {
     switch (s) {
       case "completed":
-        return "bg-[var(--primary)] text-[var(--black)] border border-[var(--primary-dark)] font-semibold";
+        return "bg-[var(--brand-blue-light)] text-[var(--brand-blue)] border border-[var(--brand-blue)] font-semibold";
       case "pending":
         return "bg-[var(--surface-2)] text-[var(--text-secondary)] border border-[var(--border)] font-medium";
       case "failed":
@@ -47,10 +47,10 @@ export default function CandidateHeader({
   };
 
   return (
-    <div className="w-full bg-[var(--white)] p-6 md:p-8 rounded-[var(--radius-lg)] border border-[var(--border)] border-l-4 border-l-[var(--primary)] shadow-[var(--shadow-md)] flex flex-col md:flex-row md:items-center justify-between gap-6">
+    <div className="w-full bg-[var(--white)] p-6 md:p-8 rounded-[var(--radius-lg)] border border-[var(--border)] border-l-4 border-l-[var(--brand-blue)] shadow-[var(--shadow-md)] flex flex-col md:flex-row md:items-center justify-between gap-6">
       {/* Left side: Avatar + Candidate details */}
       <div className="flex items-center gap-4 text-left">
-        <div className="w-14 h-14 rounded-full bg-[var(--primary)] text-[var(--black)] font-bold flex items-center justify-center text-lg shadow-[var(--shadow-sm)] border border-[var(--border)] shrink-0 select-none">
+        <div className="w-14 h-14 rounded-full bg-[var(--brand-blue)] text-[var(--white)] font-bold flex items-center justify-center text-white text-lg shadow-[var(--shadow-sm)] border border-[var(--brand-blue-dark)] shrink-0 select-none">
           {getInitials(submitterName)}
         </div>
         <div className="space-y-1">
@@ -79,7 +79,7 @@ export default function CandidateHeader({
           )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 px-5 py-2.5 border border-[var(--border)] hover:border-[var(--primary)] hover:bg-[var(--surface)] text-[var(--text-primary)] font-semibold rounded-[var(--radius-sm)] transition-all cursor-pointer text-sm shadow-[var(--shadow-sm)] active:scale-[0.98]"
+          className="flex items-center justify-center gap-2 px-5 py-2.5 border border-[var(--border)] hover:border-[var(--brand-blue)] hover:bg-[var(--surface)] text-[var(--text-primary)] font-semibold rounded-[var(--radius-sm)] transition-all cursor-pointer text-sm shadow-[var(--shadow-sm)] active:scale-[0.98]"
         >
           <FileText className="w-4 h-4 text-[var(--text-secondary)]" />
           <span>View Resume PDF</span>

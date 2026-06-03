@@ -8,11 +8,11 @@ interface SummaryCardProps {
 export default function SummaryCard({ summary }: SummaryCardProps) {
   return (
     <section
-      className="w-full p-6 md:p-8 rounded-[var(--radius-lg)] border border-[var(--border)] border-l-4 border-l-[var(--primary)] shadow-[var(--shadow-sm)] flex items-start gap-4 md:gap-6 text-left"
-      style={{ backgroundColor: "rgba(245, 197, 24, 0.06)" }}
+      className="w-full p-6 md:p-8 rounded-[var(--radius-lg)] border border-[var(--border)] border-l-4 border-l-[var(--brand-blue)] shadow-[var(--shadow-sm)] flex items-start gap-4 md:gap-6 text-left"
+      style={{ backgroundColor: "rgba(35, 55, 141, 0.06)" }}
     >
       {/* Quote Icon */}
-      <div className="shrink-0 text-[var(--primary-dark)] select-none">
+      <div className="shrink-0 text-[var(--brand-blue)] select-none">
         <Quote className="w-10 h-10" />
       </div>
 

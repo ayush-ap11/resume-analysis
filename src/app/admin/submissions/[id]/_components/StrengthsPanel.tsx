@@ -11,7 +11,7 @@ export default function StrengthsPanel({ qualities }: StrengthsPanelProps) {
     <div className="space-y-6 w-full text-left">
       {/* Section Heading */}
       <div className="flex items-center gap-2">
-        <Zap className="w-5 h-5 text-[var(--primary-dark)]" />
+        <Zap className="w-5 h-5 text-[var(--brand-blue)]" />
         <h3 className="text-lg md:text-xl font-bold text-[var(--text-primary)]">
           Key Strengths
         </h3>
@@ -22,13 +22,13 @@ export default function StrengthsPanel({ qualities }: StrengthsPanelProps) {
         {qualities.map((quality) => (
           <div
             key={quality.title}
-            className="snap-start shrink-0 min-w-[280px] md:min-w-0 bg-[var(--white)] rounded-[var(--radius-md)] border border-[var(--border)] border-l-4 border-l-[var(--primary)] shadow-[var(--shadow-sm)] p-5 relative flex flex-col justify-center space-y-2 hover:shadow-[var(--shadow-md)] transition-shadow duration-300"
+            className="snap-start shrink-0 min-w-[280px] md:min-w-0 bg-[var(--white)] rounded-[var(--radius-md)] border border-[var(--border)] border-l-4 border-l-[var(--brand-blue)] shadow-[var(--shadow-sm)] p-5 relative flex flex-col justify-center space-y-2 hover:shadow-[var(--shadow-md)] transition-shadow duration-300"
           >
             {/* Top-Right Star Icon */}
             <div className="absolute top-4 right-4 select-none">
               <Star
-                className="w-4 h-4 text-[var(--primary-dark)]"
-                style={{ fill: "var(--primary)" }}
+                className="w-4 h-4 text-[var(--brand-blue)]"
+                style={{ fill: "var(--brand-blue)" }}
               />
             </div>
 

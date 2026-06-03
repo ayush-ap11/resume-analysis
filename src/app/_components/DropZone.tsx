@@ -33,10 +33,10 @@ export default function DropZone({
       onClick={onClick}
       className={`relative flex flex-col items-center justify-center border-2 border-dashed rounded-[var(--radius-md)] p-8 text-center cursor-pointer transition-all duration-200 ${
         dragActive
-          ? "border-[var(--primary)] bg-[var(--primary-light)]"
+          ? "border-[var(--brand-blue)] bg-[var(--brand-blue-light)]"
           : file
-            ? "border-[var(--primary)] bg-[var(--surface)]"
-            : "border-[var(--border)] hover:border-[var(--primary)] hover:bg-[var(--surface)]"
+            ? "border-[var(--brand-blue)] bg-[var(--surface)]"
+            : "border-[var(--border)] hover:border-[var(--brand-blue)] hover:bg-[var(--brand-blue-light)]/20"
       } ${loading ? "opacity-60 cursor-not-allowed" : ""}`}
     >
       <input
@@ -50,7 +50,7 @@ export default function DropZone({
 
       {file ? (
         <div className="flex flex-col items-center space-y-2">
-          <div className="w-12 h-12 bg-[var(--primary-light)] flex items-center justify-center rounded-full text-[var(--primary-dark)]">
+          <div className="w-12 h-12 bg-[var(--brand-blue-light)] flex items-center justify-center rounded-full text-[var(--brand-blue)]">
             <FileText className="w-6 h-6" />
           </div>
           <p className="font-semibold text-[var(--text-primary)]">{file.name}</p>
@@ -64,7 +64,7 @@ export default function DropZone({
             <UploadCloud className="w-6 h-6" />
           </div>
           <p className="font-medium text-[var(--text-primary)]">
-            <span className="text-[var(--primary-dark)] font-semibold">
+            <span className="text-[var(--brand-blue)] font-semibold">
               Click to upload
             </span>{" "}
             or drag and drop

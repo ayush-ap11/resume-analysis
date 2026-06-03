@@ -14,7 +14,7 @@ export default function QuickStatsBar({
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
       {/* Domains Pill */}
-      <div className="flex items-center justify-between px-6 py-3.5 bg-[var(--primary)] text-[var(--black)] rounded-full shadow-[var(--shadow-sm)] border border-[var(--primary-dark)] transition-all hover:scale-[1.01]">
+      <div className="flex items-center justify-between px-6 py-3.5 bg-[var(--brand-blue)] text-white rounded-full shadow-[var(--shadow-sm)] border border-[var(--brand-blue-dark)] transition-all hover:scale-[1.01]">
         <div className="flex flex-col text-left">
           <span className="text-[10px] uppercase font-bold tracking-wider opacity-80">
             Domains Identified
@@ -29,7 +29,7 @@ export default function QuickStatsBar({
       </div>
 
       {/* Strengths Pill */}
-      <div className="flex items-center justify-between px-6 py-3.5 bg-[var(--primary)] text-[var(--black)] rounded-full shadow-[var(--shadow-sm)] border border-[var(--primary-dark)] transition-all hover:scale-[1.01]">
+      <div className="flex items-center justify-between px-6 py-3.5 bg-[var(--brand-blue)] text-white rounded-full shadow-[var(--shadow-sm)] border border-[var(--brand-blue-dark)] transition-all hover:scale-[1.01]">
         <div className="flex flex-col text-left">
           <span className="text-[10px] uppercase font-bold tracking-wider opacity-80">
             Strengths Found
@@ -44,12 +44,15 @@ export default function QuickStatsBar({
       </div>
 
       {/* Top Match Pill */}
-      <div className="flex items-center justify-between px-6 py-3.5 bg-[var(--primary)] text-[var(--black)] rounded-full shadow-[var(--shadow-sm)] border border-[var(--primary-dark)] transition-all hover:scale-[1.01]">
+      <div className="flex items-center justify-between px-6 py-3.5 bg-[var(--brand-blue)] text-white rounded-full shadow-[var(--shadow-sm)] border border-[var(--brand-blue-dark)] transition-all hover:scale-[1.01]">
         <div className="flex flex-col text-left overflow-hidden">
           <span className="text-[10px] uppercase font-bold tracking-wider opacity-80 shrink-0">
             Top Match
           </span>
-          <span className="text-sm font-extrabold truncate select-all leading-tight" title={topMatchName}>
+          <span
+            className="text-sm font-extrabold truncate select-all leading-tight"
+            title={topMatchName}
+          >
             {topMatchName || "N/A"}
           </span>
         </div>

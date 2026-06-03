@@ -16,7 +16,7 @@ export default function NotFoundView() {
         </p>
         <Link
           href="/"
-          className="inline-flex w-full items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-black rounded-lg font-semibold transition-all cursor-pointer text-sm shadow-sm"
+          className="inline-flex w-full items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white rounded-lg font-semibold transition-all cursor-pointer text-sm shadow-sm"
         >
           <ArrowLeft className="w-4 h-4" />
           Go Back Home

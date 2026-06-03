@@ -10,9 +10,9 @@ export default function DomainCards({ domains }: DomainCardsProps) {
   const getBadgeStyle = (confidence: DomainRecommendation["confidence"]) => {
     switch (confidence) {
       case "High":
-        return "bg-primary text-black font-semibold border border-primary";
+        return "bg-brand-blue-light text-brand-blue font-semibold border border-brand-blue";
       case "Medium":
-        return "border border-primary text-primary-dark font-semibold bg-primary-light/10";
+        return "border border-brand-blue text-brand-blue-dark font-semibold bg-brand-blue-light/20";
       case "Low":
         return "bg-surface-2 text-text-secondary border border-border font-medium";
       default:
@@ -51,7 +51,7 @@ export default function DomainCards({ domains }: DomainCardsProps) {
                 {(domain.evidencePoints || []).map((point, idx) => (
                   <span
                     key={`${point}-${idx}`}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-primary text-black font-semibold rounded-full text-xs select-all"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-brand-blue-light text-brand-blue font-semibold rounded-full text-xs select-all border border-brand-blue-light"
                   >
                     <span className="font-extrabold select-none">✓</span>
                     <span>{point}</span>

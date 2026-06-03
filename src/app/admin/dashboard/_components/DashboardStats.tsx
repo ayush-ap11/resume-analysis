@@ -43,7 +43,7 @@ export default function DashboardStats({ submissions }: DashboardStatsProps) {
       {statItems.map((item, index) => (
         <div
           key={`${item.title}-${index}`}
-          className="bg-white p-6 rounded-xl border border-border border-l-4 border-l-primary shadow-sm space-y-2 text-left"
+          className="bg-white p-6 rounded-xl border border-border border-l-4 border-l-[var(--brand-blue)] shadow-sm space-y-2 text-left"
         >
           <span className="text-xs uppercase font-bold tracking-widest text-text-muted">
             {item.title}

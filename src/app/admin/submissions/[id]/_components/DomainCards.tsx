@@ -21,11 +21,11 @@ const ProgressRing = ({ confidence }: { confidence: "High" | "Medium" | "Low" })
     <div
       className="w-20 h-20 rounded-full flex items-center justify-center shadow-[var(--shadow-sm)] animate-fade-in"
       style={{
-        background: `conic-gradient(var(--primary) ${progress}%, var(--surface-2) ${progress}% 100%)`,
+        background: `conic-gradient(var(--primary-light) ${progress}%, var(--surface-2) ${progress}% 100%)`,
         transition: "background 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
       }}
     >
-      <div className="w-16 h-16 rounded-full bg-[var(--white)] flex items-center justify-center font-extrabold text-sm text-[var(--text-primary)] shadow-inner select-none">
+      <div className="w-16 h-16 rounded-full bg-[var(--white)] flex items-center justify-center font-extrabold text-sm  text-[#F86232] shadow-inner select-none">
         {progress}%
       </div>
     </div>
@@ -35,8 +35,8 @@ const ProgressRing = ({ confidence }: { confidence: "High" | "Medium" | "Low" })
 export default function DomainCards({ domains }: DomainCardsProps) {
   const getConfidenceStyle = (c: string) => {
     const map: Record<string, string> = {
-      High: "bg-[var(--primary)] text-[var(--black)] font-semibold border border-[var(--primary-dark)]",
-      Medium: "border border-[var(--primary)] text-[var(--primary-dark)] font-semibold bg-[var(--primary-light)]/20",
+      High: "bg-[var(--brand-blue-light)] text-[var(--brand-blue)] font-semibold border border-[var(--brand-blue)]",
+      Medium: "border border-[var(--brand-blue)] text-[var(--brand-blue-dark)] font-semibold bg-[var(--brand-blue-light)]/20",
       Low: "border border-[var(--border)] text-[var(--text-muted)] font-medium bg-[var(--surface)]",
     };
     return map[c] || "";
@@ -45,7 +45,7 @@ export default function DomainCards({ domains }: DomainCardsProps) {
   return (
     <div className="space-y-6 w-full text-left">
       <div className="flex items-center gap-2">
-        <Target className="w-5 h-5 text-[var(--primary-dark)]" />
+        <Target className="w-5 h-5 text-[var(--brand-blue)]" />
         <h3 className="text-lg md:text-xl font-bold text-[var(--text-primary)]">Domain Fit Analysis</h3>
       </div>
 
@@ -75,18 +75,18 @@ export default function DomainCards({ domains }: DomainCardsProps) {
               {/* Row 1: WHY THIS FITS */}
               <div className="space-y-2 text-left">
                 <div className="flex items-center gap-1.5 text-[var(--text-primary)] select-none">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[var(--primary-dark)]" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[var(--brand-blue)]" />
                   <span className="text-[10px] font-bold uppercase tracking-wider">Why this fits</span>
                 </div>
                 <div className="flex flex-wrap gap-[6px] w-full overflow-hidden">
                   {(domain.evidencePoints || []).map((point, idx) => (
                     <span
                       key={`${point}-${idx}`}
-                      className="inline-flex items-center gap-1 px-2.5 py-1 bg-[var(--primary)] text-[var(--black)] font-semibold rounded-full select-all whitespace-nowrap w-fit max-w-none"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 bg-[var(--brand-blue-light)] text-[var(--brand-blue)] font-semibold rounded-full select-all whitespace-nowrap w-fit max-w-none border border-[var(--brand-blue-light)]"
                       style={{ fontSize: "12px" }}
                       title={point}
                     >
-                      <CheckCircle2 className="w-3 h-3 text-[var(--black)] shrink-0" />
+                      <CheckCircle2 className="w-3 h-3 text-[var(--brand-blue)] shrink-0" />
                       <span>{point}</span>
                     </span>
                   ))}

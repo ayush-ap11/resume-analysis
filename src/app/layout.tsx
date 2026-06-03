@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ResumeIQ — Discover Your Domain",
+  title: "EximAssist — Resume Analysis",
   description: "AI-powered resume analysis",
 };
 

@@ -44,7 +44,7 @@ export default async function ResultsPage({ params }: PageProps) {
         <div className="max-w-6xl mx-auto px-6 w-full flex items-center justify-between">
           <Link
             href="/"
-            className="flex items-center gap-1.5 text-sm font-semibold text-text-secondary hover:text-primary-dark transition-colors cursor-pointer select-none"
+            className="flex items-center gap-1.5 text-sm font-semibold text-text-secondary hover:text-[var(--brand-blue)] transition-colors cursor-pointer select-none"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back</span>
@@ -52,10 +52,9 @@ export default async function ResultsPage({ params }: PageProps) {
 
           <Link
             href="/"
-            className="font-bold text-xl flex items-center text-text-primary hover:opacity-90 transition-opacity cursor-pointer select-none"
+            className="flex items-center hover:opacity-90 transition-opacity cursor-pointer select-none"
           >
-            ResumeIQ
-            <span className="text-primary text-2xl leading-none">.</span>
+            <img src="/eximassist-logo.png" alt="EximAssist Logo" className="h-8 w-auto object-contain" />
           </Link>
 
           <div className="flex-col text-right hidden sm:flex">
@@ -75,7 +74,7 @@ export default async function ResultsPage({ params }: PageProps) {
       <main className="flex-1 max-w-6xl mx-auto px-6 py-12 w-full space-y-12">
         {/* Header Block */}
         <div className="text-left space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary-dark bg-primary-light px-3 py-1.5 rounded-full">
+          <span className="text-xs font-bold uppercase tracking-widest text-[var(--brand-blue)] bg-[var(--brand-blue-light)] px-3.5 py-1.5 rounded-full">
             Analysis Complete
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold text-text-primary mt-3">
@@ -88,7 +87,7 @@ export default async function ResultsPage({ params }: PageProps) {
 
         {/* AI Summary Card */}
         {doc.analysis && (
-          <section className="bg-white p-6 md:p-8 rounded-xl border border-border border-l-4 border-l-primary shadow-sm space-y-3">
+          <section className="bg-white p-6 md:p-8 rounded-xl border border-border border-l-4 border-l-[var(--brand-blue)] shadow-sm space-y-3">
             <h2 className="text-xs uppercase font-bold tracking-widest text-text-muted">
               AI Executive Summary
             </h2>
@@ -152,7 +151,7 @@ export default async function ResultsPage({ params }: PageProps) {
 
       {/* Minimal Footer */}
       <footer className="bg-white border-t border-border py-8 text-center text-sm text-text-secondary">
-        <p>© 2026 ResumeIQ. Built for smart job seekers.</p>
+        <p>© 2026 EximAssist. Powered by AI.</p>
       </footer>
     </div>
   );

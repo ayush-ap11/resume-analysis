@@ -106,14 +106,14 @@ export default function UploadForm() {
         type="button"
         onClick={handleSubmit}
         disabled={loading}
-        className={`w-full py-3.5 rounded-[var(--radius-sm)] font-semibold text-[var(--black)] bg-[var(--primary)] hover:bg-[var(--primary-dark)] active:scale-[0.98] transition-all cursor-pointer shadow-[var(--shadow-sm)] flex items-center justify-center gap-2 ${
+        className={`w-full py-3.5 rounded-[var(--radius-sm)] font-semibold text-[var(--white)] bg-[var(--primary)] hover:bg-[var(--primary-dark)] active:scale-[0.98] transition-all cursor-pointer shadow-[var(--shadow-sm)] flex items-center justify-center gap-2 ${
           loading ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
         {loading ? (
           <>
             <svg
-              className="animate-spin h-5 w-5 text-[var(--black)]"
+              className="animate-spin h-5 w-5 text-[var(--white)]"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

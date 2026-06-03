@@ -29,7 +29,7 @@ export default function AdminDashboard({ submissions }: AdminDashboardProps) {
   const getStatusBadge = (status: SubmissionDocument["status"]) => {
     switch (status) {
       case "completed":
-        return "bg-primary text-black font-semibold border border-primary";
+        return "bg-brand-blue text-white font-semibold border border-brand-blue-dark";
       case "pending":
         return "bg-surface-2 text-text-secondary border border-border font-medium";
       case "failed":
@@ -42,14 +42,14 @@ export default function AdminDashboard({ submissions }: AdminDashboardProps) {
   return (
     <div className="min-h-screen bg-background font-poppins text-text-primary flex flex-col">
       {/* Admin Navbar */}
-      <header className="sticky top-0 z-50 bg-white border-b-2 border-primary shadow-sm h-16 flex items-center">
+      <header className="sticky top-0 z-50 bg-white border-b border-border shadow-sm h-16 flex items-center">
         <div className="max-w-6xl mx-auto px-6 w-full flex items-center justify-between">
           <Link
             href="/admin/dashboard"
-            className="font-bold text-lg flex items-center text-text-primary cursor-pointer hover:opacity-90 select-none"
+            className="flex items-center gap-2 hover:opacity-90 transition-opacity cursor-pointer select-none"
           >
-            ResumeIQ Admin
-            <span className="text-primary text-xl leading-none">.</span>
+            <img src="/eximassist-logo.png" alt="EximAssist Logo" className="h-8 w-auto object-contain" />
+            <span className="text-[10px] bg-brand-blue text-white px-2 py-0.5 rounded font-semibold uppercase tracking-wider">Admin</span>
           </Link>
 
           <button
@@ -81,7 +81,7 @@ export default function AdminDashboard({ submissions }: AdminDashboardProps) {
               placeholder="Search by name or email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 rounded-md border border-border focus:border-primary focus:ring-2 focus:ring-primary-light focus:outline-none placeholder:text-text-muted text-text-primary text-xs bg-white cursor-pointer"
+              className="w-full pl-9 pr-4 py-2 rounded-md border border-border focus:border-brand-blue focus:ring-2 focus:ring-brand-blue-light focus:outline-none placeholder:text-text-muted text-text-primary text-xs bg-white cursor-pointer"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary" />
           </div>

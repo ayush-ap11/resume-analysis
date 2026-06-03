@@ -120,7 +120,7 @@ export default function AdminLoginForm() {
     <div className="w-full bg-white p-6 md:p-8 rounded-lg border border-border shadow-md max-w-sm space-y-6 text-sm">
       <div className="text-center space-y-1">
         <h2 className="text-xl font-bold text-text-primary">Admin Access</h2>
-        <p className="text-xs text-text-secondary">ResumeIQ Dashboard</p>
+        <p className="text-xs text-text-secondary">EximAssist Dashboard</p>
       </div>
 
       <div className="space-y-4">
@@ -135,7 +135,7 @@ export default function AdminLoginForm() {
           <input
             id="email"
             type="email"
-            placeholder="admin@resumeiq.com"
+            placeholder="admin@eximassist.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={loading}
@@ -185,7 +185,7 @@ export default function AdminLoginForm() {
           type="button"
           onClick={handleSubmit}
           disabled={loading}
-          className={`w-full py-3 rounded-md font-semibold text-black bg-primary hover:bg-primary-dark active:scale-[0.98] transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2 text-sm ${
+          className={`w-full py-3 rounded-md font-semibold text-white bg-primary hover:bg-primary-dark active:scale-[0.98] transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2 text-sm ${
             loading ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
