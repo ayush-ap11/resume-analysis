@@ -18,12 +18,13 @@ export default function AdminDashboard({ submissions }: AdminDashboardProps) {
     await signOut({ callbackUrl: "/admin/login" });
   };
 
-  const filteredSubmissions = submissions.filter((sub) => {
-    const term = searchTerm.toLowerCase();
-    return (
-      sub.submitterName.toLowerCase().includes(term) ||
-      sub.submitterEmail.toLowerCase().includes(term)
-    );
+  const filteredSubmissions = (submissions || []).filter((sub) => {
+    if (!sub) return false;
+    const term = (searchTerm || "").trim().toLowerCase();
+    const name = (sub.submitterName || "").toLowerCase();
+    const email = (sub.submitterEmail || "").toLowerCase();
+    const status = (sub.status || "").toLowerCase();
+    return name.includes(term) || email.includes(term) || status.includes(term);
   });
 
   const getStatusBadge = (status: SubmissionDocument["status"]) => {
